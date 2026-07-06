@@ -1,0 +1,560 @@
+/* =========================================================
+   SAFE / RISK - Party Edition
+   style.css
+
+   >>> KLEUREN, SPACING, RADIUS EN SHADOWS PAS JE HIER AAN <<<
+   Alle basiswaardes staan als CSS-variabelen in :root.
+   De dynamische sfeerkleuren (afhankelijk van visualLevel)
+   worden door app.js gezet via --bg-1, --bg-2, --accent, --glow.
+   ========================================================= */
+
+:root {
+  /* ---- Basiskleuren ---- */
+  --black:        #0a0a0d;
+  --near-black:   #101014;
+  --panel:        #17171c;      /* input / vlakken */
+  --panel-2:      #1d1d23;      /* iconknoppen */
+  --line:         rgba(255,255,255,0.08);
+
+  --text:         #f4f4f6;
+  --text-dim:     #8a8a95;      /* grijze subtekst */
+  --text-faint:   #55555f;      /* nog lichter grijs */
+
+  --safe-blue:    #4f7fd6;
+  --risk-red:     #d64f4f;
+  --accent-purple:#8b5cf6;
+
+  /* ---- Spacing schaal ---- */
+  --sp-1: 6px;
+  --sp-2: 10px;
+  --sp-3: 16px;
+  --sp-4: 22px;
+  --sp-5: 30px;
+  --sp-6: 40px;
+
+  /* ---- Radius ---- */
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 30px;
+  --r-pill: 999px;
+
+  /* ---- Shadows / glow ---- */
+  --shadow-card: 0 20px 50px rgba(0,0,0,0.45);
+  --shadow-btn:  0 10px 30px rgba(0,0,0,0.35);
+
+  /* ---- Fonts ---- */
+  --font-display: 'Anton', 'Arial Narrow', Impact, sans-serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:    'Space Mono', 'Courier New', monospace;
+
+  /* ---- Dynamische sfeer (default = neutraal) ---- */
+  --bg-1: #141419;
+  --bg-2: #0a0a0d;
+  --accent: #6b6b78;
+  --glow: rgba(0,0,0,0);
+}
+
+/* ---- Reset ---- */
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--black);
+  overflow: hidden;
+}
+
+/* De app is een telefoon-frame: mobile-first, gecentreerd op groot scherm */
+.app {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 100dvh;
+  margin: 0 auto;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--bg-1) 0%, var(--bg-2) 60%, var(--black) 100%);
+  transition: background 0.7s ease;
+}
+
+/* =========================================================
+   SCREEN SYSTEEM
+   ========================================================= */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: max(28px, env(safe-area-inset-top)) 22px max(26px, env(safe-area-inset-bottom));
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+.screen--active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* duwt de knop(pen) naar onderen */
+.screen-spacer { flex: 1 1 auto; }
+
+/* =========================================================
+   GEDEELDE ELEMENTEN
+   ========================================================= */
+.eyebrow,
+.step-label,
+.stepper-caption,
+.hint,
+.turn-footer,
+.card-eyebrow,
+.level-label,
+.intensity-top {
+  font-family: var(--font-mono);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.eyebrow { padding-top: 4px; }
+
+/* Grote condensed headings (HOEVEEL SPELERS, NAMEN INVULLEN) */
+.big-heading {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 13vw, 58px);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.big-heading .muted { color: var(--text-dim); }
+
+.muted { color: var(--text-dim); }
+
+/* ---- Knoppen ---- */
+.btn {
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 18px;
+  border: none;
+  border-radius: var(--r-lg);
+  padding: 20px;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.2s ease, background 0.3s ease;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn--light {
+  background: linear-gradient(180deg, #ffffff 0%, #e7e7ea 100%);
+  color: #101014;
+  box-shadow: var(--shadow-btn);
+}
+.btn--light:hover { filter: brightness(1.03); }
+
+.btn--ghost {
+  background: var(--panel);
+  color: var(--text-dim);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-size: 15px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+/* resultaat-knop: past zich aan de sfeerkleur aan */
+.btn--card {
+  background: color-mix(in srgb, var(--accent) 22%, #ffffff 0%);
+  background: linear-gradient(180deg,
+              color-mix(in srgb, var(--accent) 40%, transparent),
+              color-mix(in srgb, var(--accent) 18%, transparent));
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 12px 34px color-mix(in srgb, var(--accent) 30%, transparent);
+  margin-top: 18px;
+}
+
+/* kleine vierkante icoonknoppen (terug / +/-) */
+.icon-btn,
+.square-btn {
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.2s ease;
+}
+.icon-btn { width: 44px; height: 44px; font-size: 20px; }
+.square-btn { width: 66px; height: 66px; font-size: 30px; font-weight: 300; }
+.icon-btn:active,
+.square-btn:active { transform: scale(0.93); background: #26262d; }
+
+/* stap-header (terugknop + label) */
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* pagination dots */
+.dots { display: flex; gap: 7px; justify-content: center; }
+.dots .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  transition: background 0.2s ease, width 0.2s ease;
+}
+.dots .dot.is-active { background: var(--text); width: 16px; border-radius: 4px; }
+
+/* =========================================================
+   1. STARTSCHERM
+   ========================================================= */
+.screen-start {
+  background: radial-gradient(120% 70% at 50% 22%, #241a3a 0%, #14101f 45%, #0a0a0d 100%);
+}
+.start-hero {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.logo-badge {
+  position: relative;
+  width: 82px; height: 82px;
+  border-radius: 22px;
+  display: grid; place-items: center;
+  color: #c4b5fd;
+  background: linear-gradient(160deg, #3b2a63, #241a3a);
+  border: 1px solid rgba(168,139,250,0.35);
+  box-shadow: 0 0 40px rgba(139,92,246,0.45), inset 0 0 20px rgba(139,92,246,0.25);
+  margin-bottom: 18px;
+}
+.logo-dot {
+  position: absolute; right: -6px; bottom: -6px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #ef4444;
+  border: 3px solid #14101f;
+  box-shadow: 0 0 14px rgba(239,68,68,0.8);
+}
+.start-title {
+  font-family: var(--font-display);
+  font-size: clamp(58px, 20vw, 92px);
+  line-height: 0.92;
+  text-align: center;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  letter-spacing: 0.01em;
+}
+.title-safe { color: #f4f4f6; text-shadow: 0 0 30px rgba(120,150,255,0.25); }
+.title-risk { color: #f4f4f6; text-shadow: 0 0 30px rgba(255,110,110,0.25); }
+.start-subtitle {
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 18px;
+  margin-top: 8px;
+}
+.start-bottom { display: flex; flex-direction: column; gap: 12px; }
+.chip-row { display: flex; gap: 12px; }
+.chip {
+  flex: 1;
+  text-align: center;
+  padding: 14px;
+  border-radius: var(--r-md);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+}
+.chip--safe {
+  color: #7ea6ff;
+  background: rgba(79,127,214,0.12);
+  border: 1px solid rgba(79,127,214,0.4);
+}
+.chip--risk {
+  color: #ff8a8a;
+  background: rgba(214,79,79,0.12);
+  border: 1px solid rgba(214,79,79,0.4);
+}
+.footer-note {
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+/* =========================================================
+   2. AANTAL SPELERS
+   ========================================================= */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  margin-top: 54px;
+}
+.stepper-value { display: flex; flex-direction: column; align-items: center; }
+.stepper-number {
+  font-family: var(--font-display);
+  font-size: 96px;
+  line-height: 1;
+  color: var(--text);
+}
+.stepper-caption { margin-top: 4px; }
+.dots#count-dots { margin-top: 26px; }
+.hint { text-align: center; margin-top: 14px; letter-spacing: 0.12em; }
+
+/* =========================================================
+   3. NAMEN INVULLEN
+   ========================================================= */
+.name-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 26px;
+  overflow-y: auto;
+  max-height: 52vh;
+  padding-right: 2px;
+}
+.name-row { display: flex; align-items: center; gap: 12px; }
+.name-badge {
+  flex: none;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: grid; place-items: center;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.name-input {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 18px 18px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.name-input::placeholder { color: var(--text-faint); }
+.name-input:focus { border-color: rgba(255,255,255,0.28); background: #1c1c22; }
+
+/* =========================================================
+   4. BEURTSCHERM
+   ========================================================= */
+.turn-header { display: flex; align-items: center; justify-content: space-between; }
+.turn-title { margin-top: 22px; }
+.player-name {
+  font-family: var(--font-display);
+  font-size: clamp(46px, 15vw, 62px);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.turn-sub { color: var(--text-dim); font-size: 16px; margin-top: 6px; }
+.divider { border: none; border-top: 1px solid var(--line); margin: 18px 0 0; }
+
+.choice-cards {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 18px 0;
+  min-height: 0;
+}
+.choice-card {
+  position: relative;
+  flex: 1;
+  border-radius: var(--r-xl);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  overflow: hidden;
+  transition: transform 0.14s ease, filter 0.2s ease, box-shadow 0.3s ease;
+}
+.choice-card:active { transform: scale(0.98); }
+.choice-icon {
+  position: absolute; top: 16px; left: 18px;
+  font-size: 18px; opacity: 0.85;
+}
+.choice-big {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 18vw, 76px);
+  line-height: 1;
+  text-transform: uppercase;
+}
+.choice-sub { font-size: 15px; opacity: 0.75; }
+
+.choice-card--safe {
+  background:
+    radial-gradient(130% 90% at 50% 30%, #2a5cad 0%, #1a3d78 55%, #12294f 100%);
+  color: #cfe0ff;
+  box-shadow: 0 16px 40px rgba(30,70,150,0.3);
+}
+.choice-card--safe .choice-big { color: #bcd3ff; }
+
+.choice-card--risk {
+  background:
+    radial-gradient(130% 90% at 50% 60%, #7a2020 0%, #4a1414 55%, #2a0d0d 100%);
+  color: #ffcaca;
+  box-shadow: 0 16px 40px rgba(150,30,30,0.28);
+}
+.choice-card--risk .choice-big { color: #ffb3b3; }
+
+/* geblokkeerde keuze (forceNextChoice) */
+.choice-card.is-locked {
+  filter: grayscale(0.7) brightness(0.45);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.lock-note {
+  position: absolute; top: 16px; right: 18px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0,0,0,0.4);
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: none;
+}
+.choice-card.is-locked .lock-note { display: block; }
+
+.turn-footer {
+  text-align: center;
+  letter-spacing: 0.3em;
+  font-size: 11px;
+}
+
+/* =========================================================
+   5. RESULTAATSCHERM
+   sfeerkleuren komen uit --bg-1 / --bg-2 / --accent / --glow
+   (gezet door app.js op basis van visualLevel)
+   ========================================================= */
+.result-header { display: flex; align-items: center; justify-content: space-between; }
+.level-label { display: inline-flex; align-items: center; gap: 8px; color: var(--text-dim); }
+.level-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+.type-pill {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  color: color-mix(in srgb, var(--accent) 80%, #ffffff);
+}
+.result-who {
+  margin-top: 26px;
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.result-played {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.result-card {
+  flex: 1 1 auto;
+  margin-top: 18px;
+  border-radius: var(--r-xl);
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  background:
+    linear-gradient(160deg,
+      color-mix(in srgb, var(--accent) 22%, transparent) 0%,
+      color-mix(in srgb, var(--bg-2) 90%, transparent) 70%);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  box-shadow: 0 0 60px var(--glow), var(--shadow-card);
+  transition: background 0.6s ease, box-shadow 0.6s ease, border-color 0.6s ease;
+}
+.card-eyebrow { margin-top: 90px; }
+.card-text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(26px, 8vw, 34px);
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  margin-top: 12px;
+  color: var(--text);
+}
+
+/* intensiteitsbalk */
+.intensity { margin-top: auto; padding-top: 26px; }
+.intensity-top {
+  display: flex; justify-content: space-between;
+  color: color-mix(in srgb, var(--accent) 70%, #ffffff);
+  margin-bottom: 10px;
+}
+.intensity-bar {
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.14);
+  overflow: hidden;
+}
+.intensity-fill {
+  height: 100%;
+  width: 10%;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent) 85%, #ffffff);
+  transition: width 0.6s ease, background 0.6s ease;
+}
+
+/* =========================================================
+   RESET-KNOP
+   ========================================================= */
+.reset-btn {
+  position: fixed;
+  top: 14px; right: 14px;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(20,20,25,0.6);
+  backdrop-filter: blur(6px);
+  color: var(--text-dim);
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 50;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.reset-btn:hover { color: var(--text); }
+.reset-btn:active { transform: rotate(-90deg); }
+
+/* op grote schermen tonen we duidelijke telefoonranden */
+@media (min-width: 480px) {
+  body { display: grid; place-items: center; background: #060608; }
+  .app {
+    height: min(920px, 96dvh);
+    border-radius: 42px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+  }
+}

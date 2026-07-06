@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>SAFE / RISK · Party Edition</title>
+
+  <!-- Fonts (worden geladen via CDN als je online bent; anders vallen we terug op systeemfonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- =========================================================
+       De app bestaat uit meerdere "screens". Er is er telkens
+       maar een zichtbaar (die met class .screen--active).
+       app.js schakelt hiertussen.
+       ========================================================= -->
+  <div id="app" class="app" data-theme="neutral">
+
+    <!-- ============ 1. STARTSCHERM ============ -->
+    <section id="screen-start" class="screen screen--active screen-start">
+      <p class="eyebrow">V1.0 · PARTY EDITION</p>
+
+      <div class="start-hero">
+        <div class="logo-badge">
+          <!-- bliksem icoon -->
+          <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span class="logo-dot"></span>
+        </div>
+
+        <h1 class="start-title">
+          <span class="title-safe">SAFE</span>
+          <span class="title-risk">RISK?</span>
+        </h1>
+        <p class="start-subtitle">Wie durft echt?</p>
+      </div>
+
+      <div class="start-bottom">
+        <div class="chip-row">
+          <span class="chip chip--safe">❄ SAFE</span>
+          <span class="chip chip--risk">🔥 RISK</span>
+        </div>
+        <button class="btn btn--light" id="btn-start">START HET SPEL →</button>
+        <p class="footer-note">Speel verantwoord · drink met mate · 18+</p>
+      </div>
+    </section>
+
+    <!-- ============ 2. AANTAL SPELERS ============ -->
+    <section id="screen-count" class="screen screen-count">
+      <header class="step-header">
+        <button class="icon-btn" data-back="screen-start" aria-label="Terug">←</button>
+        <span class="step-label">STAP 1 VAN 2</span>
+      </header>
+
+      <h2 class="big-heading">
+        <span>HOEVEEL</span>
+        <span class="muted">SPELERS?</span>
+      </h2>
+
+      <div class="stepper">
+        <button class="square-btn" id="count-minus" aria-label="Minder spelers">−</button>
+        <div class="stepper-value">
+          <span class="stepper-number" id="count-number">4</span>
+          <span class="stepper-caption">spelers</span>
+        </div>
+        <button class="square-btn" id="count-plus" aria-label="Meer spelers">+</button>
+      </div>
+
+      <div class="dots" id="count-dots"></div>
+      <p class="hint" id="count-hint">3 tot 12 spelers</p>
+
+      <div class="screen-spacer"></div>
+      <button class="btn btn--light" id="btn-count-next">VERDER →</button>
+    </section>
+
+    <!-- ============ 3. NAMEN INVULLEN ============ -->
+    <section id="screen-names" class="screen screen-names">
+      <header class="step-header">
+        <button class="icon-btn" data-back="screen-count" aria-label="Terug">←</button>
+        <span class="step-label">STAP 2 VAN 2</span>
+      </header>
+
+      <h2 class="big-heading">
+        <span>NAMEN</span>
+        <span class="muted">INVULLEN</span>
+      </h2>
+
+      <div class="name-list" id="name-list">
+        <!-- name-rows worden door app.js gevuld -->
+      </div>
+
+      <div class="screen-spacer"></div>
+      <button class="btn btn--light" id="btn-names-start">STARTEN →</button>
+      <button class="btn btn--ghost" id="btn-names-skip">▷ Overslaan · gebruik standaardnamen</button>
+    </section>
+
+    <!-- ============ 4. BEURTSCHERM (SAFE / RISK kiezen) ============ -->
+    <section id="screen-turn" class="screen screen-turn">
+      <header class="turn-header">
+        <span class="step-label" id="turn-round">RONDE 1</span>
+        <div class="dots" id="turn-dots"></div>
+      </header>
+
+      <div class="turn-title">
+        <h2 class="player-name" id="turn-player">SAM</h2>
+        <p class="turn-sub">is aan de beurt</p>
+      </div>
+      <hr class="divider" />
+
+      <div class="choice-cards">
+        <button class="choice-card choice-card--safe" id="card-safe">
+          <span class="choice-icon">❄</span>
+          <span class="choice-big">SAFE</span>
+          <span class="choice-sub">Veilig spelen</span>
+          <span class="lock-note" id="lock-safe">geblokkeerd</span>
+        </button>
+
+        <button class="choice-card choice-card--risk" id="card-risk">
+          <span class="choice-icon">🔥</span>
+          <span class="choice-big">RISK</span>
+          <span class="choice-sub">Alles of niets</span>
+          <span class="lock-note" id="lock-risk">geblokkeerd</span>
+        </button>
+      </div>
+
+      <p class="turn-footer">— kies je pad —</p>
+    </section>
+
+    <!-- ============ 5. RESULTAATSCHERM ============ -->
+    <section id="screen-result" class="screen screen-result">
+      <header class="result-header">
+        <span class="level-label"><span class="level-dot"></span> LEVEL <span id="result-level">1</span></span>
+        <span class="type-pill" id="result-pill">SAFE</span>
+      </header>
+
+      <p class="result-who">
+        <span id="result-name">Sam</span><br />
+        <span class="result-played"><span id="result-played-icon">❄</span> speelde <span id="result-played-type">SAFE</span></span>
+      </p>
+
+      <div class="result-card" id="result-card">
+        <p class="card-eyebrow">JOUW OPDRACHT</p>
+        <p class="card-text" id="result-text">...</p>
+
+        <div class="intensity">
+          <div class="intensity-top">
+            <span>intensiteit</span>
+            <span id="result-status">Neutraal</span>
+          </div>
+          <div class="intensity-bar">
+            <div class="intensity-fill" id="result-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn--card" id="btn-next-player">VOLGENDE SPELER ›</button>
+    </section>
+
+  </div>
+
+  <!-- kleine resetknop, altijd zichtbaar rechtsboven -->
+  <button id="btn-reset" class="reset-btn" title="Opnieuw beginnen">⟲</button>
+
+  <script src="app.js"></script>
+</body>
+</html>
