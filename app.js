@@ -48,37 +48,57 @@ const punishments = {
     // level 1 = 1x achter elkaar SAFE
     level1: {
       good: [
-        "{player}, lekker veilig. Je mag deze ronde uitdelen: geef 1 slok weg.",
-        "{player}, niks aan de hand. Neem een slokje water als je wilt.",
-        "{player}, rustig begin. {rightPlayer} neemt 1 slok.",
-        "{player}, veilig gespeeld. Iedereen proost, jij hoeft niet.",
-        "{player}, je mag deze ronde een simpele regel bedenken voor 2 minuten."
+        "{player}, laf gespeeld, maar vooruit. Deel 1 slokken uit.",
+        "{player}, veilige keuze. Niet spannend, wel effectief. Deel 1 slokken uit.",
+        "{player}, kijk aan, schadevrij door. Deel 1 slokken uit.",
+        "{player}, weinig lef, prima opbrengst. Deel 1 slokken uit.",
+        "{player}, je glipt er makkelijk tussendoor. Deel 1 slokken uit.",
+        "{player}, saaie keuze, goed resultaat. Deel 1 slokken uit.",
+        "{player}, dit was niet indrukwekkend, maar het werkt. Deel 1 slokken uit.",
+        "{player}, laf gekozen en alsnog beloond. Deel 1 slokken uit.",
+        "{player}, niemand is onder de indruk, maar jij mag uitdelen. Deel 1 slokken uit.",
+        "{player}, rustig aan gedaan en toch winst gepakt. Deel 1 slokken uit."
       ],
       bad: [
-        "{player}, toch even pech: neem 1 slok.",
-        "{player}, klein prijsje: neem 1 slok.",
-        "{player}, saai wordt afgestraft, neem 1 slok.",
-        "{player}, deel 1 slok uit en neem er zelf ook 1.",
-        "{leftPlayer}, geef {player} gezelschap: allebei 1 slok."
+        "{player}, da’s nog eens een taaie. Neem 1 slokken.",
+        "{player}, veilig spelen en alsnog de klos. Neem 1 slokken.",
+        "{player}, zelfs SAFE helpt je niet. Neem 1 slokken.",
+        "{player}, laf gekozen, slecht beloond. Neem 1 slokken.",
+        "{player}, dat was dus nergens voor nodig. Neem 1 slokken.",
+        "{player}, voorzichtig doen en alsnog nat gaan. Neem 1 slokken.",
+        "{player}, kleine schade, maar wel schade. Neem 1 slokken.",
+        "{player}, SAFE gedrukt en toch pech. Neem 1 slokken.",
+        "{player}, dit is een matige start. Neem 1 slokken.", 
+        "{player}, de app begint meteen vervelend te doen. Neem 1 slokken."
       ]
     },
     // level 2 = 2x achter elkaar SAFE
     level2: {
-      good: [
-        "{player}, nog steeds droog. Deel 2 slokken uit.",
-        "{player}, safe queen/king. Kies iemand die 1 slok neemt.",
-        "{player}, je ontsnapt. {leftPlayer} en {rightPlayer} nemen 1 slok.",
-        "{player}, niks te doen. Verzin een toast.",
-        "{player}, veilig maar verdacht rustig. Sla deze ronde over."
-      ],
-      bad: [
-        "{player}, te voorzichtig: neem 2 slokken.",
-        "{player}, de saaiheidsbelasting: neem 2 slokken.",
-        "{player}, neem 1 slok en deel er 1 uit.",
-        "{player}, twijfelaar, neem 2 slokken.",
-        "{previousPlayer} wijst en lacht: {player} neemt 2 slokken."
-      ]
-    },
+  good: [
+    "{player}, moah, laf maar niet gek. Deel 2 slokken uit.",
+    "{player}, kijk aan, veilig gekozen en alsnog winst. Deel 2 slokken uit.",
+    "{player}, weinig lef, prima opbrengst. Deel 2 slokken uit.",
+    "{player}, dit is smerig veilig gespeeld. Deel 2 slokken uit.",
+    "{player}, saaie keuze, goed resultaat. Deel 2 slokken uit.",
+    "{player}, netjes hoor. Niemand onder de indruk, maar jij mag 2 slokken uitdelen.",
+    "{player}, veilige route gepakt. Laf, maar effectief. Deel 2 slokken uit.",
+    "{player}, je komt er weer mee weg. Knap irritant. Deel 2 slokken uit.",
+    "{player}, weinig risico, veel praat. Deel 2 slokken uit.",
+    "{player}, mwah, dit had slechter kunnen aflopen. Deel 2 slokken uit."
+  ],
+  bad: [
+    "{player}, poah, veilig gespeeld en alsnog genaaid. Neem 2 slokken.",
+    "{player}, da’s nog eens een taaie. Neem 2 slokken.",
+    "{player}, dat is nou net jammer. Neem 2 slokken.",
+    "{player}, laf gekozen, hard afgerekend. Neem 2 slokken.",
+    "{player}, ja hoor, daar is de rekening. Neem 2 slokken.",
+    "{player}, kijk aan, voorzichtig doen en alsnog nat gaan. Neem 2 slokken.",
+    "{player}, dit was dus nergens voor nodig. Neem 2 slokken.",
+    "{player}, veilige keuze, onveilige uitkomst. Neem 2 slokken.",
+    "{player}, moah, dat pakt toch even kut uit. Neem 2 slokken.",
+    "{player}, je wilde slim doen. De app dacht van niet. Neem 2 slokken."
+  ]
+},
     // level 3 = 3x achter elkaar SAFE
     level3: {
       good: [
@@ -121,88 +141,213 @@ const punishments = {
     }
   },
 
-  /* ---------- RISK (alles of niets) ---------- */
-  risk: {
-    // heat 1 = 1e keer RISK
-    heat1: {
-      win: [
-        "{player}, gewonnen! Deel 2 slokken uit.",
-        "{player}, gedurfd en beloond. {rightPlayer} neemt 1 slok.",
-        "{player}, mooi risico. Iedereen behalve jij neemt 1 slok.",
-        "{player}, winst! Kies iemand die een shotje neemt (of slok).",
-        "{player}, je durft. Maak een regel voor 3 minuten."
-      ],
-      lose: [
-        "{player}, mis: neem 2 slokken.",
-        "{player}, risico mislukt, neem 2 slokken.",
-        "{player}, doe een korte dans of neem 2 slokken.",
-        "{player}, verloren. Neem 1 slok en deel er 1 uit.",
-        "{leftPlayer} mag kiezen: laat {player} 2 slokken nemen."
-      ]
-    },
-    // heat 2
-    heat2: {
-      win: [
-        "{player}, on fire! Deel 3 slokken uit.",
-        "{player}, gewonnen. Iedereen neemt 1 slok op jouw gezondheid.",
-        "{player}, gedurfd. Kies iemand die zijn/haar telefoon 1 ronde weglegt.",
-        "{player}, winst! {leftPlayer} en {rightPlayer} nemen 1 slok.",
-        "{player}, lekker bezig. Verzin een uitdaging voor de volgende speler."
-      ],
-      lose: [
-        "{player}, au: neem 3 slokken.",
-        "{player}, risico ging mis, neem 3 slokken.",
-        "{player}, doe 5 push-ups of neem 3 slokken.",
-        "{player}, verloren. Neem 2 slokken en deel er 1 uit.",
-        "{player}, vertel een gênant feitje over jezelf of neem 3 slokken."
-      ]
-    },
-    // heat 3
-    heat3: {
-      win: [
-        "{player}, ijzersterk! Deel 4 slokken uit.",
-        "{player}, gewonnen. Iedereen neemt 2 slokken, jij deelt uit.",
-        "{player}, durfal. Kies iemand die de volgende ronde jouw opdracht overneemt.",
-        "{player}, winst! Maak een stevige regel voor de rest van het spel.",
-        "{player}, held. {rightPlayer} neemt 3 slokken namens jou."
-      ],
-      lose: [
-        "{player}, dat doet zeer: neem 4 slokken.",
-        "{player}, flink misgegokt, neem 4 slokken.",
-        "{player}, imiteer iemand aan tafel of neem 4 slokken.",
-        {
-          text: "{player}, verloren. Neem 3 slokken en speel volgende ronde verplicht SAFE.",
-          force: { who: "self", choice: "safe" }
-        },
-        "{player}, vertel je meest embarrassante verhaal of drink 4."
-      ]
-    },
-    // heat 4 = 4e keer of vaker RISK (blijft heat 4)
-    heat4: {
-      win: [
-        "{player}, ongenaakbaar! Deel 5 slokken uit zoals jij wilt.",
-        "{player}, gewonnen op het hoogste niveau. Iedereen neemt 2 slokken.",
-        "{player}, absolute durfal. Verzin de heftigste regel van de avond.",
-        {
-          text: "{player}, gewonnen - dwing de volgende speler tot RISK.",
-          force: { who: "next", choice: "risk" }
-        },
-        "{player}, legende. Kies twee mensen die elk 2 slokken nemen."
-      ],
-      lose: [
-        "{player}, verbrand: neem 5 slokken.",
-        "{player}, alles of niets... en het werd niets: neem 5 slokken.",
-        "{player}, vertel je meest gênante verhaal OF drink 4.",
-        "{player}, doe iets geks (naar keuze van de groep) of neem 5 slokken.",
-        {
-          text: "{player}, oververhit. Neem 4 slokken en speel volgende ronde verplicht SAFE.",
-          force: { who: "self", choice: "safe" }
-        }
-      ]
-    }
-  }
-};
+/* ---------- RISK (alles of niets) ---------- */
+risk: {
+  // heat 1 = 1e keer RISK
+  heat1: {
+    win: [
+      "{player}, slecht idee, prima uitvoering. Deel 2 slokken uit.",
+      "{player}, dat had fout moeten gaan. Deel 2 slokken uit.",
+      "{player}, nergens op gebaseerd, toch gelukt. Deel 2 slokken uit.",
+      "{player}, kijk aan, dom gekozen en beloond ook nog. Deel 2 slokken uit.",
+      "{player}, niet slim, wel lekker. Deel 2 slokken uit.",
+      "{player}, risico gepakt en ermee weggekomen. Deel 2 slokken uit.",
+      "{player}, dit was onverdiend, maar vooruit. Deel 2 slokken uit.",
+      "{player}, matige keuze, prima resultaat. Deel 2 slokken uit.",
+      "{player}, je komt hier veel te makkelijk mee weg. Deel 2 slokken uit.",
+      "{player}, belachelijk dat dit werkt. Deel 2 slokken uit.",
+      "{player}, eerste risk en meteen mazzel. Deel 2 slokken uit.",
+      "{player}, slecht plan, goede afloop. Deel 2 slokken uit.",
+      "{player}, de app laat je er nog één keer mee wegkomen. Deel 2 slokken uit.",
+      "{player}, dit was geen tactiek, dit was geluk. Deel 2 slokken uit.",
+      "{player}, vieze winst. Deel 2 slokken uit.",
+      "{player}, grote gok, kleine beloning. Deel 2 slokken uit.",
+      "{player}, dat ging net goed. Deel 2 slokken uit.",
+      "{player}, niemand snapt waarom, maar het werkte. Deel 2 slokken uit.",
+      "{player}, je doet maar wat en het lukt nog ook. Deel 2 slokken uit.",
+      "{player}, risk gekozen zonder plan. Toch gewonnen. Deel 2 slokken uit."
+    ],
+    lose: [
+      "{player}, ja hoor, grote mond en meteen betalen. Neem 2 slokken.",
+      "{player}, slecht idee, slechte afloop. Neem 2 slokken.",
+      "{player}, dat ging ongeveer zoals verwacht. Neem 2 slokken.",
+      "{player}, je zocht risico en vond dorst. Neem 2 slokken.",
+      "{player}, kijk aan, eerste foutje is binnen. Neem 2 slokken.",
+      "{player}, niet best. Neem 2 slokken.",
+      "{player}, dat was kort stoer doen. Neem 2 slokken.",
+      "{player}, risico gepakt, niks gekregen. Neem 2 slokken.",
+      "{player}, dit was niet je moment. Neem 2 slokken.",
+      "{player}, prima poging, matige uitkomst. Neem 2 slokken.",
+      "{player}, volledig terecht. Neem 2 slokken.",
+      "{player}, je had ook gewoon normaal kunnen doen. Neem 2 slokken.",
+      "{player}, de eerste waarschuwing is binnen. Neem 2 slokken.",
+      "{player}, dat was dus nergens op gebaseerd. Neem 2 slokken.",
+      "{player}, stoer gekozen, slap geëindigd. Neem 2 slokken.",
+      "{player}, risk gedrukt en direct spijt. Neem 2 slokken.",
+      "{player}, daar ging je momentje. Neem 2 slokken.",
+      "{player}, je probeerde spannend te doen. Viel tegen. Neem 2 slokken.",
+      "{player}, dit noemen we een matige gok. Neem 2 slokken.",
+      "{player}, pech of dom? Maakt niet uit. Neem 2 slokken."
+    ]
+  },
 
+  // heat 2
+  heat2: {
+    win: [
+      "{player}, risk nog een keer en weer mazzel. Deel 4 slokken uit.",
+      "{player}, je speelt gevaarlijk, maar het levert op. Deel 4 slokken uit.",
+      "{player}, dit is irritant effectief. Deel 4 slokken uit.",
+      "{player}, slecht idee nummer twee werkt ook nog. Deel 4 slokken uit.",
+      "{player}, je komt hier smerig goed mee weg. Deel 4 slokken uit.",
+      "{player}, niemand gunt je dit, maar jij mag uitdelen. Deel 4 slokken uit.",
+      "{player}, dat was riskant genoeg om vervelend te zijn. Deel 4 slokken uit.",
+      "{player}, kijk aan, schade voor de rest. Deel 4 slokken uit.",
+      "{player}, dit had je niet verdiend. Deel 4 slokken uit.",
+      "{player}, je doet alsof dit skill is. Deel 4 slokken uit.",
+      "{player}, tweede risk en nog steeds overeind. Deel 4 slokken uit.",
+      "{player}, je bent aan het gokken met vertrouwen. Deel 4 slokken uit.",
+      "{player}, vieze keuze, vieze winst. Deel 4 slokken uit.",
+      "{player}, de app had je moeten pakken. Gebeurde niet. Deel 4 slokken uit.",
+      "{player}, dit begint vervelend knap te worden. Deel 4 slokken uit.",
+      "{player}, slechte planning, goede uitkomst. Deel 4 slokken uit.",
+      "{player}, je loopt op dun ijs, maar vooruit. Deel 4 slokken uit.",
+      "{player}, niemand vroeg hierom, maar jij wint. Deel 4 slokken uit.",
+      "{player}, volledig onverantwoord, prima resultaat. Deel 4 slokken uit.",
+      "{player}, risk betaald zich uit. Vies. Deel 4 slokken uit."
+    ],
+    lose: [
+      "{player}, daar is de rekening. Neem 4 slokken.",
+      "{player}, tweede risk en meteen op je bek. Neem 4 slokken.",
+      "{player}, dit begint op een patroon te lijken. Neem 4 slokken.",
+      "{player}, je wilde vuurwerk. Je kreeg schade. Neem 4 slokken.",
+      "{player}, kijk aan, spijt met prik. Neem 4 slokken.",
+      "{player}, dat was iets te veel vertrouwen. Neem 4 slokken.",
+      "{player}, risk gekozen alsof je iets kon. Neem 4 slokken.",
+      "{player}, je maakt het jezelf ook niet makkelijk. Neem 4 slokken.",
+      "{player}, dit is gewoon slecht gegokt. Neem 4 slokken.",
+      "{player}, grote plannen, lege uitvoering. Neem 4 slokken.",
+      "{player}, je dacht dat je lekker bezig was. Niet dus. Neem 4 slokken.",
+      "{player}, vier slokken voor deze matige beslissing. Neem 4 slokken.",
+      "{player}, dat liep precies verkeerd. Neem 4 slokken.",
+      "{player}, risk werkt niet op hoop alleen. Neem 4 slokken.",
+      "{player}, je had kunnen stoppen bij SAFE. Neem 4 slokken.",
+      "{player}, de app geeft geen tweede waarschuwing. Neem 4 slokken.",
+      "{player}, dit was geen pech meer, dit was keuze. Neem 4 slokken.",
+      "{player}, je gokte groot en verloor simpel. Neem 4 slokken.",
+      "{player}, dat zag er al dom uit voordat je klikte. Neem 4 slokken.",
+      "{player}, volledig terecht, helaas voor jou. Neem 4 slokken."
+    ]
+  },
+
+  // heat 3
+  heat3: {
+    win: [
+      "{player}, derde risk en nog steeds niet gepakt. Deel 6 slokken uit.",
+      "{player}, dit slaat nergens op, maar het werkt. Deel 6 slokken uit.",
+      "{player}, je bent aan het ontsporen en wordt beloond. Deel 6 slokken uit.",
+      "{player}, de app haat de rest blijkbaar meer dan jou. Deel 6 slokken uit.",
+      "{player}, dit is smerig goed gegokt. Deel 6 slokken uit.",
+      "{player}, niemand wil dit toegeven, maar dit was sterk. Deel 6 slokken uit.",
+      "{player}, je staat in brand en wint nog ook. Deel 6 slokken uit.",
+      "{player}, zes slokken schade voor iemand anders. Deel 6 slokken uit.",
+      "{player}, dit is geen strategie meer, dit is brutaliteit. Deel 6 slokken uit.",
+      "{player}, je blijft maar glippen. Irritant. Deel 6 slokken uit.",
+      "{player}, gevaarlijke keuze, belachelijke beloning. Deel 6 slokken uit.",
+      "{player}, je maakt slechte keuzes op hoog niveau. Deel 6 slokken uit.",
+      "{player}, dit had je moeten slopen. In plaats daarvan win je. Deel 6 slokken uit.",
+      "{player}, risk heat loopt op en jij doet alsof het normaal is. Deel 6 slokken uit.",
+      "{player}, de rest mag jouw slechte besluit voelen. Deel 6 slokken uit.",
+      "{player}, dit is vies geluk met zelfvertrouwen. Deel 6 slokken uit.",
+      "{player}, de groep baalt, jij lacht. Deel 6 slokken uit.",
+      "{player}, dit was dom, hard en effectief. Deel 6 slokken uit.",
+      "{player}, geen idee hoe, maar vooruit. Deel 6 slokken uit.",
+      {
+        text: "{player}, smerig gewonnen. Deel 6 slokken uit en de volgende speler moet verplicht RISK.",
+        force: { who: "next", choice: "risk" }
+      }
+    ],
+    lose: [
+      "{player}, daar ging je grote verhaal. Neem 6 slokken.",
+      "{player}, derde risk en nu wordt het taai. Neem 6 slokken.",
+      "{player}, dit is de schade waar je om vroeg. Neem 6 slokken.",
+      "{player}, je bleef drukken en nu drukt de app terug. Neem 6 slokken.",
+      "{player}, kijk aan, probleem gevonden. Jij bent het. Neem 6 slokken.",
+      "{player}, dat was geen lef, dat was kortsluiting. Neem 6 slokken.",
+      "{player}, je wilde risico. Niet gaan zeuren nu. Neem 6 slokken.",
+      "{player}, zes slokken voor deze matige stunt. Neem 6 slokken.",
+      "{player}, dit begint serieus slecht te worden. Neem 6 slokken.",
+      "{player}, niemand is verbaasd. Neem 6 slokken.",
+      "{player}, dit zag je aankomen en toch deed je het. Neem 6 slokken.",
+      "{player}, je bent officieel te ver gegaan. Neem 6 slokken.",
+      "{player}, risk heat hoog, verstand laag. Neem 6 slokken.",
+      "{player}, je gooide jezelf onder de bus. Neem 6 slokken.",
+      "{player}, hier is je prijs voor dom vertrouwen. Neem 6 slokken.",
+      "{player}, dit was een taaie. Neem 6 slokken.",
+      "{player}, de app had er zin in. Jij iets minder. Neem 6 slokken.",
+      "{player}, je had één taak: niet dom doen. Neem 6 slokken.",
+      "{player}, dit is geen ongeluk meer. Neem 6 slokken.",
+      {
+        text: "{player}, hard verloren. Neem 6 slokken en speel volgende ronde verplicht SAFE.",
+        force: { who: "self", choice: "safe" }
+      }
+    ]
+  },
+
+  // heat 4 = 4e keer of vaker RISK (blijft heat 4)
+  heat4: {
+    win: [
+      "{player}, je bent niet meer aan het spelen, je bent aan het gokken met sfeer. Deel een atje uit.",
+      "{player}, hoogste risk en nog winnen ook. Deel een atje uit.",
+      "{player}, dit is compleet onnodig, maar wel gewonnen. Deel een atje uit.",
+      "{player}, de app had je moeten slopen. In plaats daarvan sloop jij iemand anders. Deel een atje uit.",
+      "{player}, je bent officieel een probleem voor de tafel. Deel een atje uit.",
+      "{player}, niemand gunt je dit. Deel een atje uit.",
+      "{player}, dit is geen geluk meer, dit is verdacht. Deel een atje uit.",
+      "{player}, je blijft maar leven. Deel een atje uit.",
+      "{player}, vieze winst op het hoogste niveau. Deel een atje uit.",
+      "{player}, de schade is nu voor iemand anders. Deel een atje uit.",
+      "{player}, je had allang gepakt moeten worden. Deel een atje uit.",
+      "{player}, dit is risk met een grote bek. Deel een atje uit.",
+      "{player}, je speelt alsof gevolgen niet bestaan. Deel een atje uit.",
+      "{player}, smerigste winst van de avond. Deel een atje uit.",
+      "{player}, dit wordt niet vergeten. Deel een atje uit.",
+      "{player}, kies iemand die jouw slechte keuzes mag verwerken. Deel een atje uit.",
+      "{player}, je komt hier schandalig goed mee weg. Deel een atje uit.",
+      "{player}, dit is precies waarom mensen je niet vertrouwen. Deel een atje uit.",
+      "{player}, hoogste heat, laagste moraal. Deel een atje uit.",
+      {
+        text: "{player}, gewonnen op standje probleemgeval. Deel een atje uit en de volgende speler moet verplicht RISK.",
+        force: { who: "next", choice: "risk" }
+      }
+    ],
+    lose: [
+      "{player}, ja hoor. Daar is-ie dan. Atje.",
+      "{player}, alles of niets. Het werd niets. Atje.",
+      "{player}, je hebt dit volledig zelf gedaan. Atje.",
+      "{player}, hoogste risk, hardste rekening. Atje.",
+      "{player}, dit is geen pech meer. Dit is beleid. Atje.",
+      "{player}, je wilde chaos. Drink chaos. Atje.",
+      "{player}, daar ging je avondstrategie. Atje.",
+      "{player}, je bent nu officieel de klos. Atje.",
+      "{player}, dit zat eraan te komen. Atje.",
+      "{player}, risk heat maximaal, spijt maximaal. Atje.",
+      "{player}, niemand gaat je helpen. Atje.",
+      "{player}, je koos geweld. De app koos terug. Atje.",
+      "{player}, dit is het gevolg van te veel zelfvertrouwen. Atje.",
+      "{player}, volledig terecht. Atje.",
+      "{player}, je had kunnen afkoelen. Deed je niet. Atje.",
+      "{player}, dit was een dramatische keuze. Atje.",
+      "{player}, je hebt jezelf keurig genaaid. Atje.",
+      "{player}, geen woorden meer nodig. Atje.",
+      "{player}, dit is het moment waarop SAFE ineens goed klinkt. Atje.",
+      {
+        text: "{player}, oververhit en afgestraft. Atje en volgende ronde verplicht SAFE.",
+        force: { who: "self", choice: "safe" }
+      }
+    ]
+  }
+}
+};
 
 /* =========================================================================
    2. CONFIG  >>> HIER PAS JE KANSEN, KLEUREN EN LABELS AAN <<<
